@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://testededons.pages.dev/sitemap.xml

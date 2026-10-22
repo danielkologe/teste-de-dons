@@ -1,0 +1,6 @@
+{
+  "name": "teste-de-dons",
+  "private": true,
+  "description": "Teste de dons espirituais interativo (site estático)",
+  "scripts": { "test": "node tests/calculo.test.js" }
+}

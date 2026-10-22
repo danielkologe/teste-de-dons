@@ -19,7 +19,7 @@ window.TESTE = {
   {
    "nome": "Discernimento",
    "desc": "Capacidade, dada por Deus, de reconhecer a origem espiritual de manifestações e situações, distinguindo o que vem de Deus do que não vem.",
-   "ref": "1João 4.1"
+   "ref": "1Coríntios 12.10"
   },
   {
    "nome": "Fé",
@@ -107,7 +107,7 @@ window.TESTE = {
   "Tenho … vontade de me envolver mais do que fiz até agora …",
   "Tive a experiência de …",
   "As afirmações a seguir correspondem … à minha situação:",
-  "Para mim … é …",
+  "Para mim é … fácil ou difícil …",
   "Eu estaria … disposto a …"
  ],
  "escalas": [
@@ -163,7 +163,7 @@ window.TESTE = {
   "colocar, de forma generosa, o meu dinheiro e as minhas posses à disposição do Reino de Deus.",
   "colaborar na elaboração de materiais que tornem simples e interessante o aprendizado das pessoas.",
   "ajudar pessoas na reflexão sobre a sua situação.",
-  "quando oro por alguém doente, Deus a cura em curto espaço de tempo.",
+  "ver que, quando oro por alguém doente, Deus a cura em curto espaço de tempo.",
   "trabalhar nos bastidores, em surdina, para apoiar as pessoas que estão realizando um ministério público.",
   "receber visitantes, mesmo quando chegam de surpresa; preparar refeições e oferecer uma boa acolhida para eles.",
   "orar por uma hora ou mais.",
@@ -174,7 +174,7 @@ window.TESTE = {
   "preocupar-me com o bem espiritual de outros cristãos e acompanhá-los por um tempo longo.",
   "servir de canal por meio do qual Deus dá orientações claras em uma determinada situação.",
   "aceitar serviços pequenos e aparentemente insignificantes na Igreja.",
-  "quando falo com facilidade em línguas estranhas.",
+  "falar com facilidade em línguas estranhas.",
   "planejar projetos para a igreja, organizá-los e achar as pessoas para a sua implantação.",
   "manter contatos com pessoas de outras culturas.",
   "conversar sobre a fé em Jesus Cristo com outras pessoas.",

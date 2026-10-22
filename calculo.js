@@ -20,6 +20,7 @@
     return respostas.every(function (r) { return r === 0 || r === 1 || r === 2 || r === 3 || r === 4; });
   }
 
+  // Respostas salvas no aparelho: 120 caracteres, "-" = sem resposta.
   function codificar(respostas) {
     return respostas.map(function (r) { return r === null || r === undefined ? '-' : String(r); }).join('');
   }
@@ -29,9 +30,20 @@
     return texto.split('').map(function (c) { return c === '-' ? null : Number(c); });
   }
 
+  // Link de resultado: só os 20 totais (0 a 24), um dígito base 25 por dom. Não revela as respostas.
+  function codificarPontos(soma) {
+    return soma.map(function (v) { return v.toString(25); }).join('');
+  }
+
+  function decodificarPontos(texto) {
+    if (typeof texto !== 'string' || !/^[0-9a-o]{20}$/.test(texto)) return null;
+    return texto.split('').map(function (c) { return parseInt(c, 25); });
+  }
+
   var api = {
     QTD_DONS: QTD_DONS, QTD_PERGUNTAS: QTD_PERGUNTAS, MAX_POR_DOM: MAX_POR_DOM,
-    pontuar: pontuar, ordenar: ordenar, completo: completo, codificar: codificar, decodificar: decodificar
+    pontuar: pontuar, ordenar: ordenar, completo: completo, codificar: codificar, decodificar: decodificar,
+    codificarPontos: codificarPontos, decodificarPontos: decodificarPontos
   };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else raiz.Calculo = api;
