@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const C = require('../calculo.js');
-const raiz = path.join(__dirname, '..');
+const C = require('../public/calculo.js');
+const raiz = path.join(__dirname, '..', 'public');
 const T = new Function('window', fs.readFileSync(path.join(raiz, 'dados.js'), 'utf8') + '; return window.TESTE;')({});
 
 let falhas = 0;
