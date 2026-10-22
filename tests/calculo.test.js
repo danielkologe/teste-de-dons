@@ -13,6 +13,9 @@ chk(T.dons.length === 20 && T.dons.every(d => d.nome && d.desc && d.ref), '20 do
 chk(T.escalas.length === 6 && T.escalas.every(e => e.length === 5), '6 escalas de 5 níveis');
 chk(T.enunciados.length === 6, '6 enunciados');
 
+chk(T.categorias.length === 4, '4 categorias do material');
+chk([0, 1, 2, 3].map(c => T.dons.filter(d => d.cat === c).length).join() === '5,4,3,8', 'categorias: 5 ministeriais, 4 palavra, 3 sinais, 8 serviço');
+
 // pontuação
 chk(C.pontuar(new Array(120).fill(4)).every(v => v === 24), 'tudo 4 = 24 por dom');
 chk(C.pontuar(new Array(120).fill(0)).every(v => v === 0), 'tudo 0 = 0');

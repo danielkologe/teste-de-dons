@@ -46,8 +46,9 @@
   function atualizarTopo() {
     var n = respondidas(), emTeste = estado.tela >= 0 && estado.tela < TELAS && !estado.pontos;
     barra.hidden = !emTeste;
+    app.classList.toggle('com-barra', emTeste);
     fill.style.width = (n / C.QTD_PERGUNTAS * 100) + '%';
-    status.textContent = estado.pontos ? 'Resultado compartilhado' : emTeste ? n + ' de ' + C.QTD_PERGUNTAS + ' respondidas' : '';
+    status.textContent = estado.pontos ? 'Resultado compartilhado' : emTeste ? n + ' de ' + C.QTD_PERGUNTAS : '';
   }
 
   function ir(tela, semHistorico) {
@@ -60,68 +61,108 @@
 
   function telaInicio() {
     var n = respondidas();
-    var retomar = n > 0 && n < C.QTD_PERGUNTAS;
-    var botoes = retomar
-      ? '<button class="btn" data-a="continuar">Continuar (' + n + ' de ' + C.QTD_PERGUNTAS + ')</button>' +
-        '<button class="btn sec" data-a="' + (estado.confirma === 'recomecar' ? 'recomecar' : 'pedirrecomecar') + '">' +
-        (estado.confirma === 'recomecar' ? 'Apagar respostas e recomeçar' : 'Recomeçar') + '</button>'
+    var confirmando = estado.confirma === 'recomecar';
+    var botoes = n > 0 && n < C.QTD_PERGUNTAS
+      ? '<button class="btn grande" data-a="continuar">Continuar (' + n + ' de ' + C.QTD_PERGUNTAS + ')</button>' +
+        '<button class="btn sec" data-a="' + (confirmando ? 'recomecar' : 'pedirrecomecar') + '">' + (confirmando ? 'Apagar respostas e recomeçar' : 'Recomeçar') + '</button>'
       : n === C.QTD_PERGUNTAS
-        ? '<button class="btn" data-a="verresultado">Ver meu resultado</button><button class="btn sec" data-a="' + (estado.confirma === 'recomecar' ? 'recomecar' : 'pedirrecomecar') + '">' + (estado.confirma === 'recomecar' ? 'Apagar respostas e refazer' : 'Refazer o teste') + '</button>'
-        : '<button class="btn" data-a="comecar">Começar o teste</button>';
+        ? '<button class="btn grande" data-a="verresultado">Ver meu resultado</button><button class="btn sec" data-a="' + (confirmando ? 'recomecar' : 'pedirrecomecar') + '">' + (confirmando ? 'Apagar respostas e refazer' : 'Refazer o teste') + '</button>'
+        : '<button class="btn grande" data-a="comecar">Começar o teste</button>';
     app.innerHTML =
+      '<section class="hero"><p class="eyebrow">Servir · Dons espirituais</p>' +
       '<h1>Descubra seus dons espirituais</h1>' +
-      '<p class="muted">Este teste ajuda a encontrar o seu lugar de atuação no corpo de Cristo. São ' + C.QTD_PERGUNTAS + ' afirmações em ' + TELAS + ' telas curtas, e leva cerca de 15 minutos.</p>' +
+      '<p>Encontre o seu lugar de atuação no corpo de Cristo. São ' + C.QTD_PERGUNTAS + ' afirmações em ' + TELAS + ' telas curtas, cerca de 15 minutos.</p>' +
+      '<div class="acoes">' + botoes + '</div></section>' +
+      '<div class="passos">' +
+      '<div class="passo c0"><b>Passo 1</b><h3>Responder</h3><p>Escolha, em cada afirmação, o círculo que mais combina com você hoje.</p></div>' +
+      '<div class="passo c1"><b>Passo 2</b><h3>Descobrir</h3><p>Veja os três dons com maior pontuação e a descrição de cada um.</p></div>' +
+      '<div class="passo c3"><b>Passo 3</b><h3>Servir</h3><p>Converse com o líder da célula e escolha onde servir.</p></div></div>' +
       '<div class="card"><ul class="dicas">' +
       '<li>Responda com sinceridade, pensando em quem você é hoje, não em quem gostaria de ser.</li>' +
-      '<li>Em cada afirmação escolha de <b>4</b> (mais forte) a <b>0</b> (nada). A escala aparece no topo de cada tela.</li>' +
-      '<li>Se em alguma área você não tem nenhuma experiência, marque <b>0</b>.</li>' +
-      '<li>Suas respostas ficam só neste aparelho. Se fechar a página, você continua de onde parou.</li></ul>' +
-      '<div class="acoes">' + botoes + '</div></div>' +
+      '<li>Quanto maior o círculo, maior a intensidade. O menor equivale a <b>0</b>, nada.</li>' +
+      '<li>Se em alguma área você não tem nenhuma experiência, marque o menor círculo.</li>' +
+      '<li>Suas respostas ficam só neste aparelho. Se fechar a página, você continua de onde parou.</li></ul></div>' +
       '<p class="nota">O teste não é conclusivo: é uma ferramenta de apoio. O resultado pode mudar com o tempo e não deve limitar o seu serviço, porque a igreja também precisa de quem se disponha a novas tarefas.</p>';
   }
 
-  function telaPerguntas() {
-    var t = estado.tela, b = bloco(t), ini = t * POR_TELA, esc = T.escalas[b];
-    var h = '<p class="muted parte">Parte ' + (t + 1) + ' de ' + TELAS + '</p>' +
-      '<div class="enunc-fixo" aria-hidden="true">' + T.enunciados[b] + '</div>' +
-      '<div class="card"><p class="enunc">' + T.enunciados[b] + '</p><ul class="legenda">';
-    for (var k = 0; k < 5; k++) h += '<li><b>' + (4 - k) + '</b>' + esc[k] + '</li>';
-    h += '</ul></div>';
-    for (var i = ini; i < ini + POR_TELA; i++) {
-      var v = estado.resp[i];
-      h += '<div class="q" id="q' + i + '"><p class="txt"><span class="num">' + (i + 1) + '.</span>' + (b === 3 ? '' : '… ') + T.perguntas[i] + '</p>' +
-        '<fieldset class="ops"><legend>Resposta da afirmação ' + (i + 1) + '</legend>';
-      for (var s = 4; s >= 0; s--) {
-        h += '<div class="op"><input type="radio" name="p' + i + '" id="p' + i + '_' + s + '" value="' + s + '"' + (v === s ? ' checked' : '') +
-          ' aria-label="' + s + ' - ' + esc[4 - s] + '"><label for="p' + i + '_' + s + '"><b>' + s + '</b><small>' + esc[4 - s] + '</small></label></div>';
-      }
-      h += '</fieldset><p class="escolhida" id="e' + i + '">' + (v === null ? '' : esc[4 - v]) + '</p></div>';
+  function linhaPergunta(i, b) {
+    var esc = T.escalas[b], v = estado.resp[i];
+    var h = '<div class="q" id="q' + i + '"><p class="txt"><span class="num">' + (i + 1) + '</span>' + (b === 3 ? '' : '… ') + T.perguntas[i] + '</p>' +
+      '<fieldset class="escala"><legend>Resposta da afirmação ' + (i + 1) + '</legend>' +
+      '<span class="ext ext-lo" aria-hidden="true">' + esc[4] + '</span><div class="dots">';
+    for (var s = 0; s <= 4; s++) {
+      h += '<div class="op s' + s + '"><input type="radio" name="p' + i + '" id="p' + i + '_' + s + '" value="' + s + '"' + (v === s ? ' checked' : '') +
+        ' aria-label="' + s + ' - ' + esc[4 - s] + '"><label for="p' + i + '_' + s + '"></label></div>';
     }
-    h += '<p class="aviso" id="aviso" role="alert" hidden>Faltam respostas nas afirmações destacadas.</p>' +
-      '<div class="acoes"><button class="btn sec" data-a="voltar">' + (t === 0 ? 'Início' : 'Voltar') + '</button><span class="esp"></span>' +
-      '<button class="btn" data-a="avancar">' + (t === TELAS - 1 ? 'Ver resultado' : 'Avançar') + '</button></div>';
-    app.innerHTML = h;
+    return h + '</div><span class="ext ext-hi" aria-hidden="true">' + esc[0] + '</span></fieldset>' +
+      '<p class="escolhida" id="e' + i + '" aria-hidden="true">' + (v === null ? '' : 'Você marcou: ' + esc[4 - v]) + '</p></div>';
   }
+
+  function telaPerguntas() {
+    var t = estado.tela, b = bloco(t), ini = t * POR_TELA;
+    var h = '<div class="parte"><b>Parte ' + (t + 1) + ' de ' + TELAS + '</b><span class="muted peq">' + (t < TELAS - 1 ? 'Faltam ' + (TELAS - 1 - t) + ' telas após esta' : 'Última tela') + '</span></div>' +
+      '<div class="enunc-fixo" aria-hidden="true">' + T.enunciados[b] + '</div>' +
+      '<div class="bloco"><p class="enunc">' + T.enunciados[b] + '</p>' +
+      '<p class="dica">Escolha o círculo: do menor (' + T.escalas[b][4].toLowerCase() + ') ao maior (' + T.escalas[b][0].toLowerCase() + ').</p></div>' +
+      '<div class="perguntas" id="perguntas">';
+    for (var i = ini; i < ini + POR_TELA; i++) h += linhaPergunta(i, b);
+    h += '</div><p class="aviso" id="aviso" role="alert" hidden>Faltam respostas nas afirmações destacadas.</p>' +
+      '<div class="barra-inf"><div class="barra-inf-in">' +
+      '<button class="btn sec peq-btn" data-a="voltar">' + (t === 0 ? 'Início' : 'Voltar') + '</button>' +
+      '<div class="prog" id="prog"></div>' +
+      '<button class="btn" data-a="avancar">' + (t === TELAS - 1 ? 'Ver resultado' : 'Avançar') + '</button></div></div>';
+    app.innerHTML = h;
+    marcarAtiva();
+    observarBloco();
+  }
+
+  // A pergunta ativa é a primeira sem resposta da tela; as demais ficam levemente esmaecidas.
+  function marcarAtiva() {
+    var cont = document.getElementById('perguntas'); if (!cont) return;
+    var f = faltantes(estado.tela), ativa = f.length ? f[0] : null;
+    Array.prototype.forEach.call(cont.querySelectorAll('.q'), function (q) { q.classList.toggle('ativa', ativa !== null && q.id === 'q' + ativa); });
+    cont.classList.toggle('tem-ativa', ativa !== null);
+    var p = document.getElementById('prog');
+    if (p) p.innerHTML = '<b>' + (POR_TELA - f.length) + ' de ' + POR_TELA + '</b>nesta tela';
+  }
+
+  // O enunciado do bloco fica fixo no topo só depois que o cartão original sai da tela.
+  var obs = null;
+  function observarBloco() {
+    if (obs) obs.disconnect();
+    var card = app.querySelector('.bloco'), fixo = app.querySelector('.enunc-fixo');
+    if (!card || !fixo || !('IntersectionObserver' in window)) return;
+    obs = new IntersectionObserver(function (es) { fixo.classList.toggle('mostra', !es[0].isIntersecting); }, { rootMargin: '-60px 0px 0px 0px' });
+    obs.observe(card);
+  }
+
+  function categoria(d) { return 'c' + T.dons[d].cat; }
 
   function telaResultado() {
     var s = soma(), ord = C.ordenar(s), top = ord.slice(0, 3);
     var empate = ord.slice(3).filter(function (o) { return o.pontos === top[2].pontos; });
-    var h = '<h1>' + (estado.pontos ? 'Resultado do teste' : 'Seu resultado') + '</h1>' +
-      '<p class="muted">Estes são os três dons com maior pontuação no teste (máximo de ' + C.MAX_POR_DOM + ' pontos por dom).</p><div class="top3">';
-    top.forEach(function (o, i) {
+    var d0 = T.dons[top[0].dom], c0 = T.categorias[d0.cat];
+    var h = '<p class="eyebrow">' + (estado.pontos ? 'Resultado do teste' : 'Seu resultado') + '</p>' +
+      '<section class="res-hero ' + categoria(top[0].dom) + '"><div class="pos">1º dom · ' + top[0].pontos + ' de ' + C.MAX_POR_DOM + ' pontos</div>' +
+      '<h2>' + d0.nome + '</h2><span class="selo">' + c0.nome + '</span>' +
+      '<p class="resumo">' + d0.desc + '</p><p class="ref">Base bíblica: ' + d0.ref + '</p></section>' +
+      '<div class="dom-sec">';
+    top.slice(1).forEach(function (o, i) {
       var d = T.dons[o.dom];
-      h += '<article class="dom"><div class="pos">' + (i + 1) + 'º dom</div><h3>' + d.nome + '</h3><div class="pts">' + o.pontos + ' de ' + C.MAX_POR_DOM + ' pontos</div>' +
-        '<p>' + d.desc + '</p><p class="ref">Base bíblica: ' + d.ref + '</p></article>';
+      h += '<article class="dom ' + categoria(o.dom) + '"><div class="pos">' + (i + 2) + 'º dom · ' + o.pontos + ' de ' + C.MAX_POR_DOM + '</div><h3>' + d.nome + '</h3>' +
+        '<span class="selo">' + T.categorias[d.cat].nome + '</span><p>' + d.desc + '</p><p class="ref">Base bíblica: ' + d.ref + '</p></article>';
     });
     h += '</div>';
     if (empate.length) {
-      h += '<p class="nota">Empate no 3º lugar: ' + empate.map(function (o) { return '<b>' + T.dons[o.dom].nome + '</b>'; }).join(', ') +
+      h += '<p class="nota topo-esp">Empate no 3º lugar: ' + empate.map(function (o) { return '<b>' + T.dons[o.dom].nome + '</b>'; }).join(', ') +
         ' também ' + (empate.length > 1 ? 'tiveram ' : 'teve ') + top[2].pontos + ' pontos. Vale conversar sobre todos com o líder da célula.</p>';
     }
-    h += '<div class="card"><h2>Todos os dons</h2><p class="muted peq">Toque em um dom para ler a descrição. Dons com a mesma pontuação estão empatados.</p><ol class="rank">';
-    ord.forEach(function (o, i) {
+    h += '<div class="card topo-esp"><h2>Todos os dons</h2><p class="muted peq">Toque em um dom para ler a descrição. Dons com a mesma pontuação estão empatados.</p><ul class="legenda-cat">';
+    T.categorias.forEach(function (c, i) { h += '<li class="c' + i + '">' + c.nome + ' <span>(' + c.sub + ')</span></li>'; });
+    h += '</ul><ol class="rank">';
+    ord.forEach(function (o) {
       var d = T.dons[o.dom], emp = ord.some(function (x) { return x.dom !== o.dom && x.pontos === o.pontos; });
-      h += '<li class="' + (i < 3 ? 'top' : '') + '"><details><summary><span class="nm">' + d.nome + (emp ? ' <em>(empate)</em>' : '') + '</span>' +
+      h += '<li class="' + categoria(o.dom) + '"><details><summary><span class="nm">' + d.nome + (emp ? ' <em>(empate)</em>' : '') + '</span>' +
         '<span class="bar"><i data-w="' + (o.pontos / C.MAX_POR_DOM * 100) + '"></i></span><span class="v">' + o.pontos + '</span></summary>' +
         '<p>' + d.desc + '</p><p class="ref">Base bíblica: ' + d.ref + '</p></details></li>';
     });
@@ -175,9 +216,10 @@
     var i = +m[1], v = +m[2], b = bloco(estado.tela), primeira = estado.resp[i] === null;
     estado.resp[i] = v;
     salvar();
-    document.getElementById('e' + i).textContent = T.escalas[b][4 - v];
+    document.getElementById('e' + i).textContent = 'Você marcou: ' + T.escalas[b][4 - v];
     document.getElementById('q' + i).classList.remove('falta');
     if (!faltantes(estado.tela).length) document.getElementById('aviso').hidden = true;
+    marcarAtiva();
     atualizarTopo();
     if (primeira) {
       var prox = faltantes(estado.tela).filter(function (x) { return x > i; })[0];

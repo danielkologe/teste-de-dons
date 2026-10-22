@@ -1,103 +1,129 @@
 // Gerado a partir do anexo "Teste de dons" do Caderno III - Dons e Espiritualidade (PIB Curitiba, 2019).
 window.TESTE = {
+ "categorias": [
+  {"nome": "Ministeriais", "sub": "avanço do Reino"},
+  {"nome": "Palavra", "sub": "crer, ouvir e praticar"},
+  {"nome": "Sinais", "sub": "comunidade do sobrenatural"},
+  {"nome": "Serviço", "sub": "serviço em amor"}
+ ],
  "dons": [
   {
    "nome": "Administração",
+   "cat": 3,
    "desc": "Capacidade de entender o que faz uma organização funcionar, traçar planos e priorizar recursos para alcançar os alvos da igreja. Pessoas objetivas, organizadas e responsáveis.",
    "ref": "1Coríntios 12.28"
   },
   {
    "nome": "Missionário",
+   "cat": 0,
    "desc": "Enviado com uma missão, normalmente fora do contexto da igreja local, para implantar e supervisionar novas obras. Adapta-se a outras culturas e tem amor enorme pelos não alcançados.",
    "ref": "Efésios 4.11-13"
   },
   {
    "nome": "Evangelista",
+   "cat": 0,
    "desc": "Comunica o evangelho de modo relevante e aproveita as oportunidades para falar de Jesus. O sinal do dom é o efeito que suas palavras e ações produzem nos não cristãos.",
    "ref": "Efésios 4.11"
   },
   {
    "nome": "Discernimento",
+   "cat": 1,
    "desc": "Capacidade, dada por Deus, de reconhecer a origem espiritual de manifestações e situações, distinguindo o que vem de Deus do que não vem.",
    "ref": "1Coríntios 12.10"
   },
   {
    "nome": "Fé",
+   "cat": 1,
    "desc": "Habilidade de crer em Deus para o impossível numa situação específica, sabendo que algo é vontade de Deus e vai acontecer.",
    "ref": "1Coríntios 12.9"
   },
   {
    "nome": "Provisão / Contribuir",
+   "cat": 3,
    "desc": "Capacidade de prover as necessidades financeiras e materiais da igreja e das pessoas, com generosidade, alegria e sem esperar nada em troca.",
    "ref": "Romanos 12.8"
   },
   {
    "nome": "Ensino",
+   "cat": 1,
    "desc": "Capacidade de transmitir os princípios bíblicos de forma prática, clara e ilustrada, para que as pessoas assimilem a Palavra. Pode ser em classe, em discipulado ou em grupo pequeno.",
    "ref": "Atos 18.26"
   },
   {
    "nome": "Sabedoria",
+   "cat": 1,
    "desc": "Capacidade de enxergar o que não é óbvio em pessoas e situações e de saber o que fazer, aplicando os princípios da Palavra às decisões práticas da vida.",
    "ref": "1Coríntios 12.8"
   },
   {
    "nome": "Curas",
+   "cat": 2,
    "desc": "Graça de Deus, manifestada por meio de uma pessoa, para curar enfermidades em nome de Jesus. Nem todos serão curados, e o propósito é sempre de Deus.",
    "ref": "1Coríntios 12.9"
   },
   {
    "nome": "Socorros",
+   "cat": 3,
    "desc": "Tomar o lugar de outro, assumindo o trabalho ou a necessidade dele. É amor em ação, visto em quem ajuda de forma prática e imediata.",
    "ref": "1Coríntios 12.28"
   },
   {
    "nome": "Hospitalidade",
+   "cat": 3,
    "desc": "Capacidade de oferecer abrigo e uma recepção calorosa a quem precisa, fazendo visitantes e desconhecidos se sentirem em casa.",
    "ref": "Hebreus 13.2"
   },
   {
    "nome": "Intercessão",
+   "cat": 3,
    "desc": "Pedir em favor de outros. Quem tem o dom ora por longos períodos, com constância, e vê respostas frequentes e específicas.",
    "ref": "1Timóteo 2.1"
   },
   {
    "nome": "Mestre",
+   "cat": 0,
    "desc": "Instrutor com conhecimento profundo da Palavra, que firma esse conhecimento na vida das pessoas até que se pareçam com Jesus. Gosta de estudar e é disciplinado.",
    "ref": "2Timóteo 2.2"
   },
   {
    "nome": "Liderança / Presidir",
+   "cat": 3,
    "desc": "Capacidade de conduzir pessoas a um objetivo comum, delegando a tarefa certa à pessoa certa. Quem lidera tem a obediência espontânea dos liderados.",
    "ref": "Romanos 12.8"
   },
   {
    "nome": "Misericórdia",
+   "cat": 3,
    "desc": "Foco nas necessidades dos outros com respeito, cuidado e simpatia, oferecendo também apoio emocional a quem sofre.",
    "ref": "Romanos 12.8"
   },
   {
    "nome": "Milagres",
+   "cat": 2,
    "desc": "Ações do poder de Deus que nenhuma lei física produz, como demonstração do Seu poder a um mundo cético. Vão desde curas até orações respondidas de forma extraordinária.",
    "ref": "1Coríntios 12.10"
   },
   {
    "nome": "Pastor",
+   "cat": 0,
    "desc": "Responsabilidade pessoal pelo bem-estar espiritual de um grupo de cristãos: alimentar, guiar, restaurar, proteger e acompanhar por um tempo longo.",
    "ref": "Efésios 4.11"
   },
   {
    "nome": "Profeta",
+   "cat": 0,
    "desc": "Expositor público da Palavra. Aplica a Bíblia com profundidade para edificar, exortar e consolar, e para levar o incrédulo a adorar a Deus.",
    "ref": "1Coríntios 14.3"
   },
   {
    "nome": "Serviços",
+   "cat": 3,
    "desc": "Disposição para fazer as tarefas práticas da igreja, inclusive as pequenas, discretas e pouco atraentes, apoiando os que estão no ministério público.",
    "ref": "Romanos 12.7"
   },
   {
    "nome": "Línguas / Interpretação",
+   "cat": 2,
    "desc": "Falar em línguas em adoração e oração, ou interpretar o que é falado, sempre com ordem e para edificação da igreja.",
    "ref": "1Coríntios 14"
   }

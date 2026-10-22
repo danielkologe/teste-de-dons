@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" preserveAspectRatio="xMidYMid slice">
+<g stroke="#2a1c0d" stroke-width="5" stroke-linejoin="round">
+<polygon points="0,0 210,0 160,140 0,110" fill="#b8860b"/>
+<polygon points="210,0 430,0 380,170 160,140" fill="#e8c35a"/>
+<polygon points="430,0 640,0 690,150 380,170" fill="#c98b1c"/>
+<polygon points="640,0 880,0 840,130 690,150" fill="#8a4b12"/>
+<polygon points="880,0 1200,0 1200,120 840,130" fill="#d9a62e"/>
+<polygon points="0,110 160,140 120,300 0,280" fill="#9c5a14"/>
+<polygon points="160,140 380,170 330,330 120,300" fill="#f0d27a"/>
+<polygon points="380,170 690,150 640,310 330,330" fill="#b8741a"/>
+<polygon points="690,150 840,130 900,300 640,310" fill="#e3b445"/>
+<polygon points="840,130 1200,120 1200,310 900,300" fill="#7a3f10"/>
+<polygon points="0,280 120,300 90,520 0,520" fill="#d9a62e"/>
+<polygon points="120,300 330,330 400,520 90,520" fill="#8a4b12"/>
+<polygon points="330,330 640,310 700,520 400,520" fill="#e8c35a"/>
+<polygon points="640,310 900,300 960,520 700,520" fill="#b8860b"/>
+<polygon points="900,300 1200,310 1200,520 960,520" fill="#c98b1c"/>
+</g>
+</svg>
