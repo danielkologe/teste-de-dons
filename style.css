@@ -78,15 +78,18 @@ p { margin: 0 0 12px; }
 .acoes .esp { flex: 1; }
 
 /* abertura */
-.hero { position: relative; overflow: hidden; border-radius: var(--raio); padding: 36px 24px 32px; margin-bottom: 20px; background: var(--gold); color: var(--on-gold); }
-.hero::before { content: ""; position: absolute; inset: 0; background: url("vitral.svg") center / cover no-repeat; opacity: .32; }
-.hero > * { position: relative; }
-.hero .eyebrow { color: var(--on-gold); opacity: .8; }
-.hero p { font-size: 18px; max-width: 34em; }
-.hero .btn { background: var(--on-gold); color: var(--gold); box-shadow: none; }
-.hero .btn:hover { background: #000; }
-.hero .btn.sec { background: transparent; color: var(--on-gold); border-color: rgba(42, 28, 13, .45); }
-.hero .btn.sec:hover { border-color: var(--on-gold); background: rgba(255, 255, 255, .25); }
+.hero { position: relative; overflow: hidden; border-radius: var(--raio); padding: 36px 24px 32px; margin-bottom: 20px; background: #211507; color: #fff6dd; }
+.hero::before { content: ""; position: absolute; inset: 0; background: url("vitral.svg") center / cover no-repeat; opacity: .7; }
+.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(33, 21, 7, .96) 0%, rgba(33, 21, 7, .84) 50%, rgba(33, 21, 7, .45) 100%); }
+.hero > * { position: relative; z-index: 1; }
+.hero h1 { color: #ffffff; }
+.hero .eyebrow { color: #f0cf62; }
+.hero p { font-size: 18px; max-width: 34em; color: #f3e8c8; }
+.hero .btn { background: var(--gold); color: #211507; box-shadow: none; }
+.hero .btn:hover { background: #e6c04a; }
+.hero .btn.sec { background: transparent; color: #fff6dd; border-color: rgba(255, 246, 221, .45); }
+.hero .btn.sec:hover { border-color: #fff6dd; background: rgba(255, 255, 255, .12); }
+.hero .btn:focus-visible { outline-color: #fff6dd; }
 .passos { display: grid; gap: 12px; margin-bottom: 20px; }
 @media (min-width: 640px) { .passos { grid-template-columns: repeat(3, 1fr); } }
 .passo { background: var(--card); border-radius: var(--raio); padding: 18px; box-shadow: var(--sombra); box-shadow: var(--sombra), inset 0 4px 0 var(--c, var(--gold)); }
